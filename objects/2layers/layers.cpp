@@ -19,10 +19,26 @@ void layer::showWeights(int input){
     }
 }
 
-void layer::out(float input[], float out[],int inputNum){
+void layer::out(double input[], double out[],int inputNum){
     for (int i = 0; i < ThisNeuronsNum; i++)
     {
-        out[i]=neurons[i].LinearRegresion(input,inputNum);
+        out[i]=neurons[i].ActivationFunctionSigmoid(neurons[i].LinearRegresion(input,inputNum));
     }
 }
  
+void layer::training(double* realOutput,double* inputs, int lenghInput , double* mistakeEndLayer){
+    for (int example = 0; example < MaxDatasetExemples; example++)
+    {
+        for (int neuron = 0; neuron < ThisNeuronsNum; neuron++)
+        {
+            neurons[neuron].TrainingOUTPUTcalculator(inputs,lenghInput,example);
+        }
+    }
+
+    for (int i = 0; i < ThisNeuronsNum; i++)
+    {
+        neurons[i].derivateEndLayer(ThisNeuronsNum,realOutput,lenghInput,mistakeEndLayer);
+    }
+    
+    //derivateEndLayer(int MaxNumData, int maxNeuronsUsed, double* realOutput, int lenghInput , double* mistakeEndLayer)
+}

@@ -14,8 +14,9 @@ private:
 public:
     void setupLayer(int neuronsNum);
     void showWeights(int input);
-    void out(float input[], float out[], int inputNum);
-    //void layerCostFunction(float activationFD[][EndLayerNeurons], float precision, float* mistakeBackLayer);
+    void out(double input[], double out[], int inputNum);
+    void training(double* realOutput,double* inputs, int lenghInput , double* mistakeEndLayer);
+    //void layerCostFunction(double activationFD[][EndLayerNeurons], double precision, double* mistakeBackLayer);
 };
 
 #endif // LAYER_h

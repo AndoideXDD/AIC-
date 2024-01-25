@@ -3,25 +3,27 @@
 #ifndef NEURON_h
 #define NEURON_h
 
-struct inputData {float lastInputs[MaxDatasetExemples][InputLengh];};
 
 class neuron {
 private:
-    float* weights = new float[NumMaxNeuronWeight];
-    float* outPut = new float[MaxDatasetExemples];
-    float variableNumber = 0;
-    inputData Input;
+    double* weights = new double[NumMaxNeuronWeight];
+    double* input = new double[NumMaxNeuronWeight*MaxDatasetExemples];
+    double* outPut = new double[MaxDatasetExemples];
+    double variableNumber = 0;
 public:
     void SetupRandomNeuron();  // Constructor
     void printWeights(int maxWeughtUsed);
-    float LinearRegresion(float* inputs, int lenghInput);
-    float TrainingLinearRegresion();
-    //float regresionOperation(float* inputs, int lenghInput, float maxPosibleOut, int exempleNum);
-    /*float regresionOperation(float* inputs, int lenghInput, float maxPosibleOut, int exempleNum);
-    float ACTHyperbolicTangent(float* inputs, int lenghInput, int exempleNum);
-    void derivateCostFunctionEndlayer(float* activationFD, float precision, float* mistakeBackLayer);
-    float derivateCostFunctionNormalLayer(float* mistakeBackLayer, float precision);
-    float derivateCostFunctionFirstLayer(float* mistakeBackLayer, float precision, float* input);*/
+    double LinearRegresion(double* inputs, int lenghInput);
+    double ActivationFunctionSigmoid(double input);
+    double TrainingOUTPUTcalculator(double* inputs ,int lenghInput,int numData);
+    void derivateEndLayer(int maxWeught,double* realOutput, int lenghInput, double* mistakeEndLayer);
+    void derivateNormalLayer();
+    //double regresionOperation(double* inputs, int lenghInput, double maxPosibleOut, int exempleNum);
+    /*double regresionOperation(double* inputs, int lenghInput, double maxPosibleOut, int exempleNum);
+    double ACTHyperbolicTangent(double* inputs, int lenghInput, int exempleNum);
+    void derivateCostFunctionEndlayer(double* activationFD, double precision, double* mistakeBackLayer);
+    double derivateCostFunctionNormalLayer(double* mistakeBackLayer, double precision);
+    double derivateCostFunctionFirstLayer(double* mistakeBackLayer, double precision, double* input);*/
 };
 
 #endif // NEURON_h
