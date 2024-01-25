@@ -23,24 +23,27 @@ int main() {
     // -------------------------------------------------------------------------
     // Here I put the code example for train a model 
     //Due that the lengh of the inputs is one, each number represents an example for the model
-    double input[] = {1,2,4,3,1};
+    double input[] = {1,2,4,2,1};
+    double neweInput[]={3};
     double outsss[2];
-    double realOut[1]={1};
+    double realOut[]={1,1,1,1,1};
     double mistakeEndLayer[2];
     double out;
     layer firstlayer[layerNum];
     firstlayer[0].setupLayer(1);
-    firstlayer[0].out(input,outsss,2);
+    firstlayer[0].out(input,outsss,1);
 
     double lasOut=0;
     for (int i = 0; i < 10000; i++)
     {
         firstlayer[0].training(realOut,input,1,mistakeEndLayer);
-        firstlayer[0].out(input,outsss,1);
-        firstlayer[0].showWeights(1);
+        firstlayer[0].out(input,outsss,5);
+        firstlayer[0].showWeights(5);
         cout << outsss [0];
     }
-    firstlayer[0].out(input,outsss,2);
+    firstlayer[0].out(neweInput,outsss,1);
+    cout << outsss [0];
+
     
 
 }
