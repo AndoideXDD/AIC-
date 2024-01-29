@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
-
+#include<windows.h> 
 void neuron::SetupRandomNeuron(){
     std::srand(std::time(0));
     int randomInteger;
@@ -55,9 +55,9 @@ double neuron::TrainingOUTPUTcalculator(double* inputs ,int lenghInput, int numD
     for (int i = 0; i < lenghInput; i++)
     {   
         input[i+numData*lenghInput] = inputs[i];
-        result=this->weights[i]*inputs[i]+result;
+        result=weights[i]*inputs[i]+result;
     }
-    result+=this->variableNumber;
+    result+=variableNumber;
     if (result >= acrtivationFunctionLimit) result = 1.;
     else if (result <= -acrtivationFunctionLimit) result = 0.;
     else result = 1. / (1. + exp(-result));
@@ -87,5 +87,7 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
         weights[i]= weights[i]-derivateValue[i];
     }
     variableNumber = variableNumber - independentMistake/MaxDatasetExemples;
+ 
+    delete[] derivateValue;
 }
 
