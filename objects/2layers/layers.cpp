@@ -26,7 +26,7 @@ void layer::out(double input[], double out[],int inputNum){
     }
 }
  
-void layer::training(double* realOutput,double* inputs, int lenghInput){
+void layer::trainingEndLayer(double* realOutput,double* inputs, int lenghInput){
     double inputExample[InputLengh];
     for (int example = 0; example < MaxDatasetExemples; example++)
     {
@@ -47,4 +47,12 @@ void layer::training(double* realOutput,double* inputs, int lenghInput){
     }
     
     //derivateEndLayer(int MaxNumData, int maxNeuronsUsed, double* realOutput, int lenghInput , double* mistakeEndLayer)
+}
+
+void layer::mistajeCopy(double* arrayToPutInfo){
+    for (int i = 0; i < MaxDatasetExemples; i++)
+    {
+        arrayToPutInfo[i]=mistakeLayer[i];
+    }
+    
 }

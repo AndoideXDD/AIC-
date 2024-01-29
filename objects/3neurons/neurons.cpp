@@ -74,7 +74,7 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
     
     for (int numData = 0; numData < MaxDatasetExemples; numData++)
     {
-        mistakeEndLayer[numData]= (outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])+mistakeEndLayer[numData];
+        mistakeEndLayer[numData]= (outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData]);
         for (int i = 0; i < maxWeught; i++)
         {
              
@@ -91,3 +91,4 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
     delete[] derivateValue;
 }
 
+ 
