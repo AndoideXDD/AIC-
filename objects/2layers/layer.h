@@ -1,5 +1,5 @@
-#include "C:\Users\andre\Desktop\UniCode\AIForC++\constants\constants.h"
-#include "C:\Users\andre\Desktop\UniCode\AIForC++\objects\3neurons\neurons.cpp"
+#include "C:\Users\andre\UniCode\AIForC++\constants\constants.h"
+#include "C:\Users\andre\UniCode\AIForC++\objects\3neurons\neurons.cpp"
 
 // layer.h
 #ifndef LAYER_h

@@ -25,13 +25,16 @@ void neuron::printWeights(int maxWeughtUsed){
     {
         std::cout << "," << weights[i];
     }
+    std::cout << ",The independent value:" << variableNumber ;
     std::cout << "}";
+    
 }
 
 double neuron::LinearRegresion(double* inputs, int lenghInput){
     double result=0;
     for (int i = 0; i < lenghInput; i++)
     {   
+         
         result=this->weights[i]*inputs[i]+result;
     }
     return (result+this->variableNumber);
@@ -42,6 +45,7 @@ double neuron::ActivationFunctionSigmoid(double input){
     if (input >= acrtivationFunctionLimit) result = 1.;
     else if (input <= -acrtivationFunctionLimit) result = 0.;
     else result = 1. / (1. + exp(-input));
+    
     return result;
 }
 
@@ -63,7 +67,7 @@ double neuron::TrainingOUTPUTcalculator(double* inputs ,int lenghInput, int numD
 // Put the MaxNumData
 void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput , double* mistakeEndLayer){
     double* derivateValue = new double[maxWeught+1]; 
-    double independentMistake;
+    double independentMistake=0;
     // Inicialice derivateValue
     for (int i = 0; i < maxWeught; i++){derivateValue [i] = 0;}
     for (int i = 0; i < MaxDatasetExemples; i++){mistakeEndLayer[i]=0;}
@@ -74,9 +78,9 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
         for (int i = 0; i < maxWeught; i++)
         {
              
-            derivateValue[i]=precision*(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])*input[i+numData*lenghInput]+derivateValue[i];
+            derivateValue[i]= precisionnnnnnn *(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])*input[i+numData*lenghInput]+derivateValue[i];
         }
-        independentMistake = precision*(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])+derivateValue[maxWeught+1];
+        independentMistake = precisionnnnnnn *(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])+ independentMistake;
     }
     for (int i = 0; i < maxWeught; i++){
         derivateValue[i] = derivateValue [i]/MaxDatasetExemples;

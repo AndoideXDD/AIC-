@@ -1,4 +1,4 @@
-#include "C:\Users\andre\Desktop\UniCode\AIForC++\constants\constants.h"
+#include "C:\Users\andre\UniCode\AIForC++\constants\constants.h"
 // neuron.h
 #ifndef NEURON_h
 #define NEURON_h
