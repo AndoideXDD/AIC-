@@ -87,7 +87,7 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
         weights[i]= weights[i]-derivateValue[i];
     }
     variableNumber = variableNumber - independentMistake/MaxDatasetExemples;
- 
+    // Free the space of the variable 
     delete[] derivateValue;
 }
 
