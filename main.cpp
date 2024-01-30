@@ -49,9 +49,12 @@ int main() {
             {
                 mistake[i+example*EndLayerNeurons]=(output[i]-realOut[i+example*EndLayerNeurons])*output[i]*(1-output[i]);
             }
-            // The second argument must be the size of the layer before the end one
-            firstlayer[2].trainingEndLayer(mistake,MaxNormalLayerNeurons);
+            
         }
+        // The second argument must be the size of the layer before the end one
+        firstlayer[2].trainingEndLayer(mistake,MaxNormalLayerNeurons);
+        firstlayer[1].trainingLayer(mistake,MaxNormalLayerNeurons);
+        firstlayer[0].trainingLayer(mistake,MaxNormalLayerNeurons);
 
         
     }

@@ -87,17 +87,22 @@ void neuron::derivateEndLayer( int maxWeught  , double* mistakeEndLayer,double* 
 }
 
 
-void neuron::derivateNormalLayer( int maxWeught  , double* mistakeEndLayer,double* inputExample){
+void neuron::derivateNormalLayer( int maxWeught  , double* mistakeLastLayer,double* inputExample,double* outExample){
     double* derivateValue = new double[maxWeught+1]; 
     double independentMistake=0;
+    double sumWeights=0;
     for (int i = 0; i < maxWeught; i++){derivateValue [i] = 0;}
     for (int numData = 0; numData < MaxDatasetExemples; numData++)
     {
         for (int i = 0; i < maxWeught; i++)
         {
-            derivateValue[i]= precisionnnnnnn *mistakeEndLayer[numData]*weights[i]*inputExample[i+numData*maxWeught]+derivateValue[i];
+            derivateValue[i]= precisionnnnnnn *mistakeLastLayer[numData]*weights[i]*inputExample[i+numData*maxWeught]*(outExample[numData]*(1-outExample[numData]))+derivateValue[i];
+            sumWeights+=weights[i];
         }
-        independentMistake = precisionnnnnnn *mistakeEndLayer[numData]+ independentMistake;
+        // The independent value will be calculeted by multipling the sum of all weights
+        independentMistake = precisionnnnnnn *mistakeLastLayer[numData]*sumWeights*(outExample[numData]*(1-outExample[numData]))+ independentMistake;
+        mistakeLastLayer[numData]= mistakeLastLayer[numData]*sumWeights*(outExample[numData]*(1-outExample[numData]));
+        sumWeights=0;
     }
     for (int i = 0; i < maxWeught; i++){
         derivateValue[i] = derivateValue [i]/MaxDatasetExemples;

@@ -34,7 +34,7 @@ void layer::outTrain(double input[], double out[],int inputNum,int example){
             inputExample[j+example*inputNum]=input[j];
         }
         out[i]=neurons[i].ActivationFunctionSigmoid(neurons[i].LinearRegresion(input,inputNum));
-        outExample[i+example*inputNum]=out[i];
+        outExample[example]=out[i];
     }
 }
  
@@ -52,14 +52,6 @@ void layer::trainingLayer(double* mistake, int lenghInput){
     
     for (int i = 0; i < ThisNeuronsNum; i++)
     {
-        neurons[i].derivateNormalLayer(lenghInput,mistake,inputExample);
+        neurons[i].derivateNormalLayer(lenghInput,mistake,inputExample,outExample);
     }
-}
-
-void layer::mistajeCopy(double* arrayToPutInfo){
-    for (int i = 0; i < MaxDatasetExemples; i++)
-    {
-        arrayToPutInfo[i]=mistakeLayer[i];
-    }
-    
 }
