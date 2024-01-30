@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
-#include<windows.h> 
+
 void neuron::SetupRandomNeuron(){
     std::srand(std::time(0));
     int randomInteger;
@@ -65,22 +65,17 @@ double neuron::TrainingOUTPUTcalculator(double* inputs ,int lenghInput, int numD
     return result;
 }
 // Put the MaxNumData
-void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput , double* mistakeEndLayer){
+void neuron::derivateEndLayer( int maxWeught  , double* mistakeEndLayer,double* inputExample){
     double* derivateValue = new double[maxWeught+1]; 
     double independentMistake=0;
-    // Inicialice derivateValue
     for (int i = 0; i < maxWeught; i++){derivateValue [i] = 0;}
-    for (int i = 0; i < MaxDatasetExemples; i++){mistakeEndLayer[i]=0;}
-    
     for (int numData = 0; numData < MaxDatasetExemples; numData++)
     {
-        mistakeEndLayer[numData]= (outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData]);
         for (int i = 0; i < maxWeught; i++)
         {
-             
-            derivateValue[i]= precisionnnnnnn *(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])*input[i+numData*lenghInput]+derivateValue[i];
+            derivateValue[i]= precisionnnnnnn *mistakeEndLayer[numData]*inputExample[i+numData*maxWeught]+derivateValue[i];
         }
-        independentMistake = precisionnnnnnn *(outPut[numData]-realOutput[numData])*(outPut[numData])*(1-outPut[numData])+ independentMistake;
+        independentMistake = precisionnnnnnn *mistakeEndLayer[numData]+ independentMistake;
     }
     for (int i = 0; i < maxWeught; i++){
         derivateValue[i] = derivateValue [i]/MaxDatasetExemples;
@@ -91,4 +86,24 @@ void neuron::derivateEndLayer( int maxWeught, double* realOutput, int lenghInput
     delete[] derivateValue;
 }
 
- 
+
+void neuron::derivateNormalLayer( int maxWeught  , double* mistakeEndLayer,double* inputExample){
+    double* derivateValue = new double[maxWeught+1]; 
+    double independentMistake=0;
+    for (int i = 0; i < maxWeught; i++){derivateValue [i] = 0;}
+    for (int numData = 0; numData < MaxDatasetExemples; numData++)
+    {
+        for (int i = 0; i < maxWeught; i++)
+        {
+            derivateValue[i]= precisionnnnnnn *mistakeEndLayer[numData]*weights[i]*inputExample[i+numData*maxWeught]+derivateValue[i];
+        }
+        independentMistake = precisionnnnnnn *mistakeEndLayer[numData]+ independentMistake;
+    }
+    for (int i = 0; i < maxWeught; i++){
+        derivateValue[i] = derivateValue [i]/MaxDatasetExemples;
+        weights[i]= weights[i]-derivateValue[i];
+    }
+    variableNumber = variableNumber - independentMistake/MaxDatasetExemples;
+    // Free the space of the variable 
+    delete[] derivateValue;
+}

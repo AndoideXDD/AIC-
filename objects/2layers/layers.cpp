@@ -25,28 +25,35 @@ void layer::out(double input[], double out[],int inputNum){
         out[i]=neurons[i].ActivationFunctionSigmoid(neurons[i].LinearRegresion(input,inputNum));
     }
 }
- 
-void layer::trainingEndLayer(double* realOutput,double* inputs, int lenghInput){
-    double inputExample[InputLengh];
-    for (int example = 0; example < MaxDatasetExemples; example++)
-    {
-        for (int i = 0; i < InputLengh; i++)
-        {
-            
-            inputExample[i]=inputs[i+example*InputLengh];
-        }
-        for (int neuron = 0; neuron < ThisNeuronsNum; neuron++)
-        {
-            neurons[neuron].TrainingOUTPUTcalculator(inputExample,lenghInput,example);
-        }
-    }
 
+void layer::outTrain(double input[], double out[],int inputNum,int example){
     for (int i = 0; i < ThisNeuronsNum; i++)
     {
-        neurons[i].derivateEndLayer(ThisNeuronsNum,realOutput,lenghInput,mistakeLayer);
+        for (int j = 0; j < inputNum; j++)
+        {
+            inputExample[j+example*inputNum]=input[j];
+        }
+        out[i]=neurons[i].ActivationFunctionSigmoid(neurons[i].LinearRegresion(input,inputNum));
+        outExample[i+example*inputNum]=out[i];
+    }
+}
+ 
+
+void layer::trainingEndLayer(double* mistake, int lenghInput){
+    for (int i = 0; i < ThisNeuronsNum; i++)
+    {
+        neurons[i].derivateEndLayer(lenghInput,mistake,inputExample);
     }
     
     //derivateEndLayer(int MaxNumData, int maxNeuronsUsed, double* realOutput, int lenghInput , double* mistakeEndLayer)
+}
+
+void layer::trainingLayer(double* mistake, int lenghInput){
+    
+    for (int i = 0; i < ThisNeuronsNum; i++)
+    {
+        neurons[i].derivateNormalLayer(lenghInput,mistake,inputExample);
+    }
 }
 
 void layer::mistajeCopy(double* arrayToPutInfo){

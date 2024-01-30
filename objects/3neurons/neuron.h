@@ -16,8 +16,8 @@ public:
     double LinearRegresion(double* inputs, int lenghInput);
     double ActivationFunctionSigmoid(double input);
     double TrainingOUTPUTcalculator(double* inputs ,int lenghInput,int numData);
-    void derivateEndLayer(int maxWeught,double* realOutput, int lenghInput, double* mistakeEndLayer);
-    void derivateNormalLayer();
+    void derivateEndLayer(int maxWeught  , double* mistakeEndLayer,double* inputExample);
+    void derivateNormalLayer(int maxWeught  , double* mistakeEndLayer,double* inputExample);
     //double regresionOperation(double* inputs, int lenghInput, double maxPosibleOut, int exempleNum);
     /*double regresionOperation(double* inputs, int lenghInput, double maxPosibleOut, int exempleNum);
     double ACTHyperbolicTangent(double* inputs, int lenghInput, int exempleNum);
